@@ -158,7 +158,7 @@ void request_process_loop(int fd)
 
 		gettime64(recv_time);
 		/* recv_time in local endian */
-		log_request_arrive(recv_time);
+		/* log_request_arrive(recv_time); */
 
 		pid = fork();
 		if (pid == 0) {
@@ -194,10 +194,6 @@ void ntp_server(struct sockaddr_in bind_addr)
 		perror("Bind error");
 		die(NULL);
 	}
-
-	log_ntp_event(	"\n========================================\n"
-			"= Server started, waiting for requests =\n"
-			"========================================\n");
 
 	request_process_loop(s);
 	close(s);
